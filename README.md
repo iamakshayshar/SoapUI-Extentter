@@ -50,15 +50,15 @@ Although there is zero configuration required in SOAPUI project, but if you have
 
 1. Add Author Name in TestSuite Custom Property. (It should be "Author" [Case Sensitive])
 
-![alt text](https://github.com/iamakshayshar/SoapUI-Extentter/blob/main/Images/SoapUI-TestSuite.JPG?raw=true)
+![alt text](https://github.com/iamakshayshar/SoapUI-Extentter/blob/master/Images/SoapUI-TestSuite.JPG?raw=true)
 
 2. Verify the Author information in Extent Report,
 
-![alt text](https://github.com/iamakshayshar/SoapUI-Extentter/blob/main/Images/ExtentReport-Author.JPG?raw=true)
+![alt text](https://github.com/iamakshayshar/SoapUI-Extentter/blob/master/Images/ExtentReport-Author.JPG?raw=true)
 
 3. Detailed Report in Extent Report
 
-![alt text](https://github.com/iamakshayshar/SoapUI-Extentter/blob/main/Images/ExtentReport-Detailed.JPG?raw=true)
+![alt text](https://github.com/iamakshayshar/SoapUI-Extentter/blob/master/Images/ExtentReport-Detailed.JPG?raw=true)
 
 # AddOn with this utility:
 As an addOn to this utility, I have also added code for data driven testing support inside SOAPUI. This git repo also have one sample project (calculator-soapui-project_Updated.xml) which have all the groovy code for data driven testing.
