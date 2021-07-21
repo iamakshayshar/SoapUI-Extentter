@@ -307,7 +307,8 @@ public class Report {
 			for (int failMsgIter = 0; failMsgIter < failMsgLen; failMsgIter++)
 				failedMessages.add(testStepContext.getMessages()[failMsgIter]);
 
-			if (testStepContext.getTestStep().getProperty("ResponseAsXml") != null) {
+			if (testStepContext.getTestStep().getProperty("ResponseAsXml") != null
+					&& testStepContext.getTestStep().getProperty("Request") == null) {
 				ResponseAsXMLForJDBC = testStepContext.getTestStep().getProperty("ResponseAsXml").getValue();
 				if (ResponseAsXMLForJDBC.isEmpty()) {
 					assignCategory(testSuiteId, "JDBC");
