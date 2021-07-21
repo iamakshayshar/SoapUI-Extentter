@@ -236,6 +236,14 @@ public class Report {
 
 						actualEndPoint = getEndpoint(endPoint);
 
+						if (actualEndPoint.contains("-")) {
+							String[] Endpoints = actualEndPoint.split("-", 2);
+							String partOne = Endpoints[0].trim();
+							String env = testStepContext.getTestStep().getTestCase().getTestSuite().getProject()
+									.getProperty(Endpoints[1].trim()).getValue();
+							actualEndPoint = partOne + env;
+						}
+
 						actualEndPoint = testStepContext.getTestStep().getTestCase().getTestSuite().getProject()
 								.getProperty(actualEndPoint).getValue();
 
@@ -335,6 +343,14 @@ public class Report {
 
 						actualEndPoint = getEndpoint(endPoint);
 
+						if (actualEndPoint.contains("-")) {
+							String[] Endpoints = actualEndPoint.split("-", 2);
+							String partOne = Endpoints[0].trim();
+							String env = testStepContext.getTestStep().getTestCase().getTestSuite().getProject()
+									.getProperty(Endpoints[1].trim()).getValue();
+							actualEndPoint = partOne + env;
+						}
+
 						actualEndPoint = testStepContext.getTestStep().getTestCase().getTestSuite().getProject()
 								.getProperty(actualEndPoint).getValue();
 
@@ -430,7 +446,7 @@ public class Report {
 			String[] arrOfStr = endPoint.split("#", 0);
 			String[] EndpointPartOne = arrOfStr[2].split("\\$", 2);
 			String[] EndpointPartTwo = arrOfStr[4].split("}", 2);
-			actualEndPoint = EndpointPartOne[0] + EndpointPartTwo[0];
+			actualEndPoint = EndpointPartOne[0].trim() + " - " + EndpointPartTwo[0].trim();
 		}
 		return actualEndPoint;
 	}
