@@ -252,7 +252,7 @@ import java.lang.String
 // Checking if import is successfull
 log.info Hello.hello();
 
-String excelPath = "E:\\Repositories\\SoapUIUtlity-ListenerReporter\\soapui-extentter\\Sample-Data\\Excel-Sheet\\CalculatorData.xlsx";
+String excelPath = "C:\\Akshay_Data\\Personal_Learning\\SoapUI-Extentter\\Sample-Data\\Excel-Sheet\\CalculatorData.xlsx";
 String excelSheet = "Sheet1";
 boolean dataAdded = false
 boolean execCompleted = false

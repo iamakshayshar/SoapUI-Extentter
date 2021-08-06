@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tns:soapui-listeners xmlns:tns="http://eviware.com/soapui/config">
 
-<tns:listener id="TestStepListener" listenerClass="com.tsys.extentter.soapui.listener.ExtenterTestRunListener"
+<tns:listener id="TestStepListener" listenerClass="com.soapuiutils.extentter.soapui.listener.ExtenterTestRunListener"
    listenerInterface="com.eviware.soapui.model.testsuite.TestRunListener" />
-<tns:listener id="TestCaseListener" listenerClass="com.tsys.extentter.soapui.listener.ExtenterTestSuiteRunListener"
+<tns:listener id="TestCaseListener" listenerClass="com.soapuiutils.extentter.soapui.listener.ExtenterTestSuiteRunListener"
    listenerInterface="com.eviware.soapui.model.testsuite.TestSuiteRunListener" />
-<tns:listener id="TestSuiteListener" listenerClass="com.tsys.extentter.soapui.listener.ExtenterProjectRunListener"
+<tns:listener id="TestSuiteListener" listenerClass="com.soapuiutils.extentter.soapui.listener.ExtenterProjectRunListener"
    listenerInterface="com.eviware.soapui.model.testsuite.ProjectRunListener" />
 </tns:soapui-listeners>
