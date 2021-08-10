@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tns:soapui-listeners xmlns:tns="http://eviware.com/soapui/config">
-
+<!--This will initialize TestStep level reporting-->
 <tns:listener id="TestStepListener" listenerClass="com.soapuiutils.extentter.soapui.listener.ExtenterTestRunListener"
    listenerInterface="com.eviware.soapui.model.testsuite.TestRunListener" />
+<!--This will initialize TestCase level reporting-->
 <tns:listener id="TestCaseListener" listenerClass="com.soapuiutils.extentter.soapui.listener.ExtenterTestSuiteRunListener"
    listenerInterface="com.eviware.soapui.model.testsuite.TestSuiteRunListener" />
+<!--This will initialize TestSuite level reporting-->
 <tns:listener id="TestSuiteListener" listenerClass="com.soapuiutils.extentter.soapui.listener.ExtenterProjectRunListener"
    listenerInterface="com.eviware.soapui.model.testsuite.ProjectRunListener" />
 </tns:soapui-listeners>
