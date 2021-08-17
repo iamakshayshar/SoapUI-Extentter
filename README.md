@@ -26,9 +26,9 @@ Similarly TestSuiteRunListener listens to execution at TestSuite level and provi
 Lastly TestRunListener listens to execution at TestCase level and provides methods as beforeRun, afterRun, beforeStep and afterStep. I have implemented these methods to generate extent report from Project, TestSuite and TestCase execution.
 
 # SOAPUI Extenter jar file
-SOAPUI Extenter Jar file can be download via two ways,
-1. Refer to the later release in GIT,
-	https://github.com/iamakshayshar/SoapUI-Extentter/releases/tag/v3.0
+Download Jar & Listener-XML file from latest release from below location,
+1. Refer to the latest release in GIT,
+	https://github.com/iamakshayshar/SoapUI-Extentter/releases
 
 # Steps to use SOAPUI-Extentter utility:
 There are two ways to use this utility. *If one wants to use this as it is follow the steps below,
