@@ -60,7 +60,7 @@ Although there is zero configuration required in SOAPUI project, but if you have
 
 ![alt text](https://github.com/iamakshayshar/SoapUI-Extentter/blob/master/Images/ExtentReport-Detailed.JPG?raw=true)
 
-If you want the project properties should not be added to Extent Report Dashboard, then configure project properties and add property with name "AddDataToReport" and assign value to it as FALSE. The value for this property accepts only Boolean value and if the value is neither TRUE nor FALSE, then default it considered as TRUE. 
+If you want the project properties should not be added to Extent Report Dashboard, then configure project properties and add a property with the name "AddDataToReport" and assign value to it as FALSE. The value for this property accepts only Boolean value and if the value is neither TRUE nor FALSE, then default it is considered as TRUE.
 
 If the value if TRUE, then the project properties are added to Extent Report Dashboard. 
 
