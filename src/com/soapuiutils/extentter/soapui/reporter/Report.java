@@ -31,6 +31,7 @@ import com.eviware.soapui.model.testsuite.TestStepResult;
 public class Report {
 
 	private ExtentReports reports;
+	private Object object;
 	private static Map extentNodeMap;
 	private static Map extentTestMap;
 
@@ -423,17 +424,52 @@ public class Report {
 
 	public void addEnvironmentDetails(List<TestProperty> properties) {
 		try {
-			int propSize = properties.size();
-			if (propSize != 0) {
-				for (int propInterator = 0; propInterator < propSize; propInterator++) {
-					reports.setSystemInfo(properties.get(propInterator).getName(),
-							properties.get(propInterator).getValue());
+			boolean flag = true;
+			flag = envLogCheck(properties);
+			if (flag) {
+				int propSize = properties.size();
+				if (propSize != 0) {
+					for (int propInterator = 0; propInterator < propSize; propInterator++) {
+						if (properties.get(propInterator).getName().contains("Password")
+								|| properties.get(propInterator).getName().contains("Pass")) {
+							reports.setSystemInfo(properties.get(propInterator).getName(), "*******");
+						} else {
+							reports.setSystemInfo(properties.get(propInterator).getName(),
+									properties.get(propInterator).getValue());
+						}
+					}
 				}
 			}
 		} catch (Exception e) {
 			String exceptionMessage = " Exception occurred for Report method - addEnvironmentDetails as ";
 			SoapUI.log(exceptionMessage + e.toString());
 		}
+	}
+
+	private boolean envLogCheck(List<TestProperty> properties) {
+		boolean propValue = true;
+		try {
+			int propSize = properties.size();
+			if (propSize != 0) {
+				for (int propInterator = 0; propInterator < propSize; propInterator++) {
+					if (properties.get(propInterator).getName().equalsIgnoreCase("AddDataToReport")) {
+						if (properties.get(propInterator).getValue().equalsIgnoreCase("True")) {
+							return propValue;
+						} else if (properties.get(propInterator).getValue().equalsIgnoreCase("False")) {
+							return false;
+						} else {
+							SoapUI.log(
+									"Invalid value specified for 'AddDataToReport' in project properties. Please check and correct.");
+							return propValue;
+						}
+					}
+				}
+			}
+		} catch (Exception e) {
+			String exceptionMessage = " Exception occurred for Report method - addEnvironmentDetails as ";
+			SoapUI.log(exceptionMessage + e.toString());
+		}
+		return propValue;
 	}
 
 	private String getEndpoint(String endPoint) {

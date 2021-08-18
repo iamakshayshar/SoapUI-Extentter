@@ -60,6 +60,16 @@ Although there is zero configuration required in SOAPUI project, but if you have
 
 ![alt text](https://github.com/iamakshayshar/SoapUI-Extentter/blob/master/Images/ExtentReport-Detailed.JPG?raw=true)
 
+If you want the project properties should not be added to Extent Report Dashboard, then configure project properties and add property with name "AddDataToReport" and assign value to it as FALSE. The value for this property accepts only Boolean value and if the value is neither TRUE nor FALSE, then default it considered as TRUE. 
+
+If the value if TRUE, then the project properties are added to Extent Report Dashboard. 
+
+![alt text](https://github.com/iamakshayshar/SoapUI-Extentter/blob/master/Images/AddDataToReport_Properties-True.JPG?raw=true)
+
+If the value if FALSE, then the project properties are NOT added to Extent Report Dashboard. 
+
+![alt text](https://github.com/iamakshayshar/SoapUI-Extentter/blob/master/Images/AddDataToReport_Properties-False.JPG?raw=true)
+
 # AddOn with this utility:
 As an addOn to this utility, I have also added code for data driven testing support inside SOAPUI. This git repo also have one sample project (calculator-soapui-project_Updated.xml) which have all the groovy code for data driven testing.
 
