@@ -1,6 +1,10 @@
 package com.soapuiutils.extentter.soapui.listener;
 
 import java.io.File;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.concurrent.ThreadLocalRandom;
 
 /*
  * Author : Akshay Sharma
@@ -10,7 +14,10 @@ import java.io.File;
 
 public class Test {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws URISyntaxException, IOException {
+
+		System.out.println(" java.time.LocalTime.now()" +  ThreadLocalRandom.current().nextInt());
+
 		String str = "${#Project#PorticoEndpoint${#Project#Environment}}";
 		// String str = "${#Project#EndPoint}";
 

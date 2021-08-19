@@ -1,6 +1,7 @@
 package com.soapuiutils.extentter.soapui.reporter;
 
 import java.io.File;
+import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -9,9 +10,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ThreadLocalRandom;
 
 import org.apache.commons.io.FileUtils;
-
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.markuputils.Markup;
@@ -34,14 +35,17 @@ public class Report {
 	private Object object;
 	private static Map extentNodeMap;
 	private static Map extentTestMap;
+	private String finalReportPath;
 
 	@SuppressWarnings("rawtypes")
 	public Report(String reportPath, String reportName) {
 		try {
-			archieveReports(reportPath, reportPath + "_old" + File.separator + "Report-" + java.time.LocalDate.now());
 			String fileName = getReportName(reportName);
+			reportPath = reportPath + File.separator + java.time.LocalDate.now() + "_"
+					+ ThreadLocalRandom.current().nextInt();
 			new File(reportPath).mkdirs();
 			String path = reportPath + File.separator + fileName;
+			this.finalReportPath = path;
 			ExtentSparkReporter spark = new ExtentSparkReporter(path);
 			spark.config().setEncoding("utf-8");
 			spark.config().setDocumentTitle("Automation Report " + reportName);
@@ -71,6 +75,7 @@ public class Report {
 		return fileName;
 	}
 
+	@Deprecated
 	public static void archieveReports(String srcFilePath, String destFilePath) {
 		try {
 			if (new File(destFilePath).exists()) {
@@ -412,10 +417,15 @@ public class Report {
 	}
 
 	public void endTestLog() {
+		File file;
+		URI uri;
 		try {
 			reports.flush();
 			extentTestMap.clear();
 			extentNodeMap.clear();
+			file = new File(finalReportPath);
+			uri = file.toURI();
+			java.awt.Desktop.getDesktop().browse(uri);
 		} catch (Exception e) {
 			String exceptionMessage = " Exception occurred for Report method - endTestLog as ";
 			SoapUI.log(exceptionMessage + e.toString());
@@ -439,6 +449,8 @@ public class Report {
 						}
 					}
 				}
+			} else {
+				reports.setSystemInfo("AddDataToReport", "False");
 			}
 		} catch (Exception e) {
 			String exceptionMessage = " Exception occurred for Report method - addEnvironmentDetails as ";
