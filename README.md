@@ -78,4 +78,4 @@ As an addOn to this utility, I have also added code for data driven testing supp
 * This utlity is testing on JAVA version "1.8.0_221".
 
 # License
-SoapUI-Extentter is an Open Source Plugin and 3.3 will be released under Apache-2.0
+SoapUI-Extentter is an Open Source Plugin and 4.0 will be released under Apache-2.0
