@@ -76,3 +76,6 @@ As an addOn to this utility, I have also added code for data driven testing supp
 # Support:
 * This utlity is tested with SOAPUI version 5.3.0, 5.4.0, 5.5.0 & 5.6.0.
 * This utlity is testing on JAVA version "1.8.0_221".
+
+# License
+SoapUI-Extentter is an Open Source Plugin and 3.3 is released under Apache-2.0
