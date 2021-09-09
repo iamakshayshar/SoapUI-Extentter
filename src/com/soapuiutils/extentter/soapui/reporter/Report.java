@@ -6,11 +6,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ThreadLocalRandom;
 
 import org.apache.commons.io.FileUtils;
 import com.aventstack.extentreports.ExtentReports;
@@ -41,8 +42,9 @@ public class Report {
 	public Report(String reportPath, String reportName) {
 		try {
 			String fileName = getReportName(reportName);
-			reportPath = reportPath + File.separator + java.time.LocalDate.now() + "_"
-					+ ThreadLocalRandom.current().nextInt();
+			SimpleDateFormat formatter = new SimpleDateFormat("dd_MM_yyyy-HHmmss");
+			Date date = new Date();
+			reportPath = reportPath + File.separator + formatter.format(date);
 			new File(reportPath).mkdirs();
 			String path = reportPath + File.separator + fileName;
 			this.finalReportPath = path;
@@ -54,9 +56,8 @@ public class Report {
 			spark.config().setTimelineEnabled(true);
 
 			this.reports = new ExtentReports();
-			reports.setSystemInfo("Owner", "Akshay Sharma");
-			reports.setSystemInfo("Maintainer",
-					"<a href='mailto:akshay.sharma979@gmail.com'>akshay.sharma979@gmail.com</a>");
+			reports.setSystemInfo("<b>Plugin Owner / Maintainer</b>",
+					"<b>Akshay Sharma | <a href='mailto:akshay.sharma979@gmail.com'><b>akshay.sharma979@gmail.com</b></a></b>");
 			reports.setSystemInfo("Executor", System.getProperty("user.name"));
 			reports.setSystemInfo("SoapUI Version", SoapUI.SOAPUI_VERSION);
 			reports.attachReporter(spark);
@@ -253,15 +254,14 @@ public class Report {
 						actualEndPoint = testStepContext.getTestStep().getTestCase().getTestSuite().getProject()
 								.getProperty(actualEndPoint).getValue();
 
-						actualData = "<br><b>\n\n------------- ENDPOINT DETAILS --------------\n\n</b><br>"
-								+ actualEndPoint;
+						actualData = "<br><b>\n\n ENDPOINT DETAILS : </b>" + actualEndPoint;
 
 						getTestNode(testSuiteId, testCaseId).pass(logText + " <b>Check Details </b> " + actualData
 								+ "<br><b>Below are the Actual Request and Response Data.</b>");
 
 						getTestNode(testSuiteId, testCaseId).info(mReqRes);
 					} else {
-						actualData = "<br><b>\n\n------------- ENDPOINT DETAILS --------------\n\n</b><br>" + endPoint;
+						actualData = "<br><b>\n\n ENDPOINT DETAILS : </b>" + endPoint;
 
 						getTestNode(testSuiteId, testCaseId).pass(logText + " <b>Check Details </b> " + actualData
 								+ "<br><b>Below are the Actual Request and Response Data.</b>");
@@ -361,26 +361,25 @@ public class Report {
 						actualEndPoint = testStepContext.getTestStep().getTestCase().getTestSuite().getProject()
 								.getProperty(actualEndPoint).getValue();
 
-						actualData = "<br><b>\n\n------------- ENDPOINT DETAILS --------------\n\n</b><br>"
-								+ actualEndPoint
-								+ "<br><b>\n\n------------- FAILURE REASON -----------------\n\n</b><br>"
-								+ failedMessages.toString();
+						actualData = "<br><b>\n\n ENDPOINT DETAILS : </b>" + actualEndPoint;
 
 						getTestNode(testSuiteId, testCaseId).fail(logText + " <b>Failed. Check Details </b> "
 								+ actualData + "<br><b>Below are the Actual Request and Response Data.</b>");
 
 						getTestNode(testSuiteId, testCaseId).info(mReqRes);
+
+						getTestNode(testSuiteId, testCaseId).info(new RuntimeException(failedMessages.toString()));
 
 						failedMessages.clear();
 					} else {
-						actualData = "<br><b>\n\n------------- ENDPOINT DETAILS --------------\n\n</b><br>" + endPoint
-								+ "<br><b>\n\n------------- FAILURE REASON -----------------\n\n</b><br>"
-								+ failedMessages.toString();
+						actualData = "<br><b>\n\n ENDPOINT DETAILS : </b>" + endPoint;
 
 						getTestNode(testSuiteId, testCaseId).fail(logText + " <b>Failed. Check Details </b> "
 								+ actualData + "<br><b>Below are the Actual Request and Response Data.</b>");
 
 						getTestNode(testSuiteId, testCaseId).info(mReqRes);
+
+						getTestNode(testSuiteId, testCaseId).info(new RuntimeException(failedMessages.toString()));
 
 						failedMessages.clear();
 					}
@@ -388,10 +387,10 @@ public class Report {
 					SoapUI.log("Test Log Started for TestStep " + logText + " of TestCase " + testCaseId
 							+ " of TestSuite " + testSuiteId);
 
-					actualData = "<br><b>\n\n------------- FAILURE REASON -----------------\n\n</b><br>"
-							+ failedMessages.toString();
+					getTestNode(testSuiteId, testCaseId).fail(logText + " <b>Failed. Check Details </b> ");
 
-					getTestNode(testSuiteId, testCaseId).fail(logText + " <b>Failed. Check Details </b> " + actualData);
+					getTestNode(testSuiteId, testCaseId).info(new RuntimeException(failedMessages.toString()));
+
 					failedMessages.clear();
 				} else {
 					getTestNode(testSuiteId, testCaseId).fail(logText + " <b>Failed.<b>");
@@ -400,16 +399,13 @@ public class Report {
 				SoapUI.log("Test Log Started for TestStep " + logText + " of TestCase " + testCaseId + " of TestSuite "
 						+ testSuiteId);
 
-				actualData = "<br><b>\n\n------------- FAILURE REASON -----------------\n\n</b><br>"
-						+ failedMessages.toString();
+				getTestNode(testSuiteId, testCaseId).fail(logText + " <b>Failed. Check Details </b> ");
 
-				getTestNode(testSuiteId, testCaseId).fail(logText + " <b>Failed. Check Details </b> " + actualData);
+				getTestNode(testSuiteId, testCaseId).info(new RuntimeException(failedMessages.toString()));
+
 				failedMessages.clear();
 			}
-
-		} catch (
-
-		Exception e) {
+		} catch (Exception e) {
 			String exceptionMessage = " Exception occurred for Report method - logFail as ";
 			SoapUI.log(exceptionMessage + e.toString());
 			SoapUI.log(e.getLocalizedMessage());
@@ -423,6 +419,7 @@ public class Report {
 			reports.flush();
 			extentTestMap.clear();
 			extentNodeMap.clear();
+			SoapUI.log("Opening report in the default browser");
 			file = new File(finalReportPath);
 			uri = file.toURI();
 			java.awt.Desktop.getDesktop().browse(uri);

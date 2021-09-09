@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.concurrent.ThreadLocalRandom;
 
 /*
@@ -16,7 +18,9 @@ public class Test {
 
 	public static void main(String[] args) throws URISyntaxException, IOException {
 
-		System.out.println(" java.time.LocalTime.now()" +  ThreadLocalRandom.current().nextInt());
+		SimpleDateFormat formatter = new SimpleDateFormat("dd_MM_yyyy-HHmmss");  
+	    Date date = new Date();  
+	    System.out.println(formatter.format(date));  
 
 		String str = "${#Project#PorticoEndpoint${#Project#Environment}}";
 		// String str = "${#Project#EndPoint}";
