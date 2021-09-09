@@ -1,8 +1,0 @@
-Release 4.0 Features:
-
-1. Added support to add View for exceptions and categorized assertion failures to this new view.
-2. Updated Apache-2.0 License since version 4.0
-3. Updated extentreport and dependencies to latest version (v5.0.8)
-
-Fixed:
-1. Fixed folder naming issues.
