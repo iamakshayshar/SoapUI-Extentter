@@ -36,13 +36,15 @@ Download Jar & Listener-XML file from latest release from below location,
 # Steps to use SOAPUI-Extentter utility:
 
 - If you only want to generate ExtentReport :
-	There are two ways to use this utility. *If one wants to use this as it is follow the steps below,
+	There are two ways to use this utility. 
+	
+	* If one wants to use this as it is follow the steps below,
 
 		1. Copy the jar file downloaded from above google drive and place it under "${SOAPUI_HOME}/bin/ext" folder.
 		2. Copy the xml file from "Listener-XML" folder and place it under "${SOAPUI_HOME}/bin/listeners" folder.
 		3. Execute the project or testsuite and you will have extent report generate in "Reports" folder where your project XML is saved.
 
-	If one wants to customize this utility then follow the steps below,
+	* If one wants to customize this utility then follow the steps below,
 
 		1. Complete the change as what is required.
 		2. Build the project
@@ -54,7 +56,7 @@ Download Jar & Listener-XML file from latest release from below location,
 	
 		1. Update the project properties with the Name and Values as Below,
 		
-		![alt text](https://github.com/iamakshayshar/SoapUI-Extentter/blob/master/Images/KlovConfig.JPG?raw=true)
+![alt text](https://github.com/iamakshayshar/SoapUI-Extentter/blob/master/Images/KlovConfig.JPG?raw=true)
 		
 		** Please update the values for three (MongoDBIP, MongoDBPort & KlovServerUrl) properties.
 		
@@ -67,25 +69,25 @@ Although there is zero configuration required in SOAPUI project, but if you have
 
 	1. Add Author Name in TestSuite Custom Property. (It should be "Author" [Case Sensitive])
 
-	![alt text](https://github.com/iamakshayshar/SoapUI-Extentter/blob/master/Images/SoapUI-TestSuite.JPG?raw=true)
+![alt text](https://github.com/iamakshayshar/SoapUI-Extentter/blob/master/Images/SoapUI-TestSuite.JPG?raw=true)
 
 	2. Verify the Author information in Extent Report,
 
-	![alt text](https://github.com/iamakshayshar/SoapUI-Extentter/blob/master/Images/ExtentReport-Author.JPG?raw=true)
+![alt text](https://github.com/iamakshayshar/SoapUI-Extentter/blob/master/Images/ExtentReport-Author.JPG?raw=true)
 
 	3. Detailed Report in Extent Report
 
-	![alt text](https://github.com/iamakshayshar/SoapUI-Extentter/blob/master/Images/ExtentReport-Detailed.JPG?raw=true)
+![alt text](https://github.com/iamakshayshar/SoapUI-Extentter/blob/master/Images/ExtentReport-Detailed.JPG?raw=true)
 
 If you want the project properties should not be added to Extent Report Dashboard, then configure project properties and add a property with the name "AddDataToReport" and assign value to it as FALSE. The value for this property accepts only Boolean value and if the value is neither TRUE nor FALSE, then default it is considered as TRUE.
 
 If the value if TRUE, then the project properties are added to Extent Report Dashboard. 
 
-	![alt text](https://github.com/iamakshayshar/SoapUI-Extentter/blob/master/Images/AddDataToReport_Properties-True.JPG?raw=true)
+![alt text](https://github.com/iamakshayshar/SoapUI-Extentter/blob/master/Images/AddDataToReport_Properties-True.JPG?raw=true)
 
 If the value if FALSE, then the project properties are NOT added to Extent Report Dashboard. 
 
-	![alt text](https://github.com/iamakshayshar/SoapUI-Extentter/blob/master/Images/AddDataToReport_Properties-False.JPG?raw=true)
+![alt text](https://github.com/iamakshayshar/SoapUI-Extentter/blob/master/Images/AddDataToReport_Properties-False.JPG?raw=true)
 
 # AddOn with this utility:
 As an addOn to this utility, I have also added code for data driven testing support inside SOAPUI. This git repo also have one sample project (calculator-soapui-project_Updated.xml) which have all the groovy code for data driven testing.
