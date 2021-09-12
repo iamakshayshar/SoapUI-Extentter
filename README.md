@@ -66,15 +66,15 @@ Download Jar & Listener-XML file from latest release from below location,
 # Additional Steps to configure in SOAPUI project (If Required):
 Although there is zero configuration required in SOAPUI project, but if you have added an Author for each TestSuite as Custom Property, [Author (Key) : AuthorName (Value)] it will be added in Extent Report itself. No other change is required.
 
-	1. Add Author Name in TestSuite Custom Property. (It should be "Author" [Case Sensitive])
+1. Add Author Name in TestSuite Custom Property. (It should be "Author" [Case Sensitive])
 
 ![alt text](https://github.com/iamakshayshar/SoapUI-Extentter/blob/master/Images/SoapUI-TestSuite.JPG?raw=true)
 
-	2. Verify the Author information in Extent Report,
+2. Verify the Author information in Extent Report,
 
 ![alt text](https://github.com/iamakshayshar/SoapUI-Extentter/blob/master/Images/ExtentReport-Author.JPG?raw=true)
 
-	3. Detailed Report in Extent Report
+3. Detailed Report in Extent Report
 
 ![alt text](https://github.com/iamakshayshar/SoapUI-Extentter/blob/master/Images/ExtentReport-Detailed.JPG?raw=true)
 
