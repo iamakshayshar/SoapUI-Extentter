@@ -55,14 +55,15 @@ Download Jar & Listener-XML file from latest release from below location,
 
 	* If one wants to generate Klov report along with ExtentReport, follow the steps below,
 
-		1. Update the project properties with the Name and Values as below image,
-		2. Copy the jar file downloaded from above google drive and place it under "${SOAPUI_HOME}/bin/ext" folder.
-		3. Copy the xml file from "Listener-XML" folder and place it under "${SOAPUI_HOME}/bin/listeners" folder.
-		4. Execute the project or testsuite and you will have extent report generate in "Reports" folder where your project XML is saved.
+		1. Update the project properties with the Name and Values as Below,
 		
 ![alt text](https://github.com/iamakshayshar/SoapUI-Extentter/blob/master/Images/KlovConfig.JPG?raw=true)
 		
-	*Please update the values for three (MongoDBIP, MongoDBPort & KlovServerUrl) properties.
+	Note : Please update the values for three (MongoDBIP, MongoDBPort & KlovServerUrl) properties.
+		
+		2. Copy the jar file downloaded from above google drive and place it under "${SOAPUI_HOME}/bin/ext" folder.
+		3. Copy the xml file from "Listener-XML" folder and place it under "${SOAPUI_HOME}/bin/listeners" folder.
+		4. Execute the project or testsuite and you will have extent report generate in "Reports" folder where your project XML is saved.
 
 # Additional Steps to configure in SOAPUI project (If Required):
 Although there is zero configuration required in SOAPUI project, but if you have added an Author for each TestSuite as Custom Property, [Author (Key) : AuthorName (Value)] it will be added in Extent Report itself. No other change is required.
