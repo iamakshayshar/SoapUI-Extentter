@@ -18,6 +18,7 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.markuputils.Markup;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
+import com.aventstack.extentreports.reporter.ExtentKlovReporter;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
 import com.eviware.soapui.SoapUI;
@@ -39,7 +40,7 @@ public class Report {
 	private String finalReportPath;
 
 	@SuppressWarnings("rawtypes")
-	public Report(String reportPath, String reportName) {
+	public Report(String reportPath, String reportName, HashMap<String, String> klovConfig) {
 		try {
 			String fileName = getReportName(reportName);
 			SimpleDateFormat formatter = new SimpleDateFormat("dd_MM_yyyy-HHmmss");
@@ -60,7 +61,19 @@ public class Report {
 					"<b>Akshay Sharma | <a href='mailto:akshay.sharma979@gmail.com'><b>akshay.sharma979@gmail.com</b></a></b>");
 			reports.setSystemInfo("Executor", System.getProperty("user.name"));
 			reports.setSystemInfo("SoapUI Version", SoapUI.SOAPUI_VERSION);
-			reports.attachReporter(spark);
+
+			if (!klovConfig.get("MongoDBIP").isEmpty() && !klovConfig.get("MongoDBPort").isEmpty()
+					&& !klovConfig.get("KlovServerUrl").isEmpty()) {
+				ExtentKlovReporter klov = new ExtentKlovReporter(reportName);
+				klov.initMongoDbConnection(klovConfig.get("MongoDBIP"),
+						Integer.parseInt(klovConfig.get("MongoDBPort")));
+				klov.setProjectName(reportName);
+				klov.setReportName("2.0");
+				klov.initKlovServerConnection(klovConfig.get("KlovServerUrl"));
+				reports.attachReporter(spark, klov);
+			} else {
+				reports.attachReporter(spark);
+			}
 
 			extentTestMap = new HashMap();
 			extentNodeMap = new HashMap();
@@ -74,34 +87,6 @@ public class Report {
 	public static String getReportName(String reportName) {
 		String fileName = "AutomationReport_" + reportName + "_" + java.time.LocalDate.now() + ".html";
 		return fileName;
-	}
-
-	@Deprecated
-	public static void archieveReports(String srcFilePath, String destFilePath) {
-		try {
-			if (new File(destFilePath).exists()) {
-				FileUtils.deleteDirectory(new File(destFilePath));
-			} else {
-				new File(destFilePath).mkdirs();
-			}
-
-			if (srcFilePath != null && srcFilePath.trim().length() > 0 && destFilePath != null
-					&& destFilePath.trim().length() > 0) {
-				Path srcPathObj = Paths.get(srcFilePath);
-				Path destPathObj = Paths.get(destFilePath);
-				Path targetPathObj = Files.move(srcPathObj, destPathObj, StandardCopyOption.REPLACE_EXISTING);
-
-				if (targetPathObj != null) {
-					String logMessage = "All the reports are archieved to " + destPathObj;
-					SoapUI.log(logMessage);
-				} else {
-					String logMessage = "Failed to archieve reports to " + destPathObj;
-					SoapUI.log(logMessage);
-				}
-			}
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
 	}
 
 	public void assignCategory(String testSuiteId, String categoryName) {

@@ -1,6 +1,8 @@
 package com.soapuiutils.extentter.soapui.listener;
 
 import java.io.File;
+import java.util.HashMap;
+
 import com.eviware.soapui.SoapUI;
 import com.eviware.soapui.model.testsuite.TestCase;
 import com.eviware.soapui.model.testsuite.TestCaseRunner;
@@ -49,7 +51,12 @@ public class ExtenterTestSuiteRunListener implements TestSuiteRunListener {
 				String testSuiteDesc = context.getTestSuite().getDescription();
 				String testSuiteId = context.getTestSuite().getId();
 
-				TSservice.startReporting(reportPath, testSuiteName);
+				HashMap<String, String> klovConfig = new HashMap<String, String>();
+				klovConfig.put("MongoDBIP", "");
+				klovConfig.put("MongoDBPort", "");
+				klovConfig.put("KlovServerUrl", "");
+
+				TSservice.startReporting(reportPath, testSuiteName, klovConfig);
 				TSservice.startTestSuiteLogging(testSuiteName, testSuiteDesc, testSuiteId);
 			}
 		} catch (Exception t) {

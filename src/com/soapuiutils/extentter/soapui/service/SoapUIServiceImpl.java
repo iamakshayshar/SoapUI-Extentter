@@ -1,5 +1,6 @@
 package com.soapuiutils.extentter.soapui.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.eviware.soapui.SoapUI;
@@ -22,9 +23,9 @@ public class SoapUIServiceImpl implements SoapUIService {
 
 	public Report report;
 
-	public void startReporting(String reportPath, String reportName) {
+	public void startReporting(String reportPath, String reportName, HashMap<String, String> klovConfig) {
 		try {
-			report = new Report(reportPath, reportName);
+			report = new Report(reportPath, reportName, klovConfig);
 		} catch (Throwable t) {
 			SoapUI.log("SOAPUI Extentter Error in  startLaunch of StepBasedSoapUIServiceImpl " + t.getMessage());
 		}

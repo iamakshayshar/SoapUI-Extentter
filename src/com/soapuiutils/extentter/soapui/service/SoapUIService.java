@@ -1,5 +1,6 @@
 package com.soapuiutils.extentter.soapui.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.eviware.soapui.model.propertyexpansion.PropertyExpansionContext;
@@ -13,7 +14,7 @@ import com.eviware.soapui.model.testsuite.*;
 
 public interface SoapUIService {
 
-	void startReporting(String reportPath, String reportName);
+	void startReporting(String reportPath, String reportName, HashMap<String, String> klovConfig);
 
 	void finishReporting();
 
