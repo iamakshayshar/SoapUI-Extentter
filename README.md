@@ -35,8 +35,7 @@ Download Jar & Listener-XML file from latest release from below location,
 
 # Steps to use SOAPUI-Extentter utility:
 
-- If you only want to generate ExtentReport :
-	There are two ways to use this utility. 
+- If you only want to generate ExtentReport & Klov Report, Follow steps below based on what you are looking for:
 	
 	* If one wants to use this as it is follow the steps below,
 
