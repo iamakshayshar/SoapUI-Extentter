@@ -1,6 +1,9 @@
 # SOAPUI-Extentter
 This is an easy utility create to generate extent report based on SOAPUI project execution. This utility supports SOAPUI PROJECT execution report, SOAPUI TESTSUITE execution report and you can also generate SOAPUI Individual TestCase execution report.
 
+# Sample Extent Report
+https://iamakshayshar.github.io/
+
 # What is Extent Report & Klov Report?
 Extent Report is a HTML based reporting library which is used for making excellent execution reports and simple to understand. This can be used with TestNG automation framework when using Selenium WebDriver for JAVA projects. In this utility I have utilized the listener capability of SOAPUI to generate Extent Report based on PROJECT execution and TESTSUITE execution. Extent Report provide good detailed execution report with graphical representation of Pass and Failed testcases.
 
