@@ -1,6 +1,7 @@
 package com.soapuiutils.extentter.soapui.listener;
 
 import java.io.File;
+import java.net.InetAddress;
 import java.util.HashMap;
 import java.util.List;
 
@@ -24,6 +25,7 @@ public class ExtenterProjectRunListener implements ProjectRunListener {
 
 	public static SoapUIService Projservice = null;
 	public String reportPath;
+	private static int timeout = 1000;
 
 	public void beforeRun(ProjectRunner runner, ProjectRunContext context) {
 		// SoapUI.log("Inside BeforeRun in ProjectRunListener - 1");
@@ -51,8 +53,12 @@ public class ExtenterProjectRunListener implements ProjectRunListener {
 			if (propSize != 0) {
 				for (int propInterator = 0; propInterator < propSize; propInterator++) {
 					if (properties.get(propInterator).getName().equalsIgnoreCase("MongoDBIP")) {
-						if (properties.get(propInterator).getValue() != null) {
+						if (properties.get(propInterator).getValue() != null && InetAddress
+								.getByName(properties.get(propInterator).getValue()).isReachable(timeout)) {
 							klovMap.put("MongoDBIP", properties.get(propInterator).getValue());
+						} else {
+							SoapUI.log("MongoDBIP is not accessible");
+							klovMap.put("MongoDBIP", "");
 						}
 					}
 					if (properties.get(propInterator).getName().equalsIgnoreCase("MongoDBPort")) {
