@@ -1,12 +1,8 @@
 package com.soapuiutils.extentter.soapui.listener;
 
-import java.io.File;
 import java.io.IOException;
-import java.net.URI;
+import java.net.InetAddress;
 import java.net.URISyntaxException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.concurrent.ThreadLocalRandom;
 
 /*
  * Author : Akshay Sharma
@@ -18,50 +14,10 @@ public class Test {
 
 	public static void main(String[] args) throws URISyntaxException, IOException {
 
-		SimpleDateFormat formatter = new SimpleDateFormat("dd_MM_yyyy-HHmmss");  
-	    Date date = new Date();  
-	    System.out.println(formatter.format(date));  
-
-		String str = "${#Project#PorticoEndpoint${#Project#Environment}}";
-		// String str = "${#Project#EndPoint}";
-
-		int countOfHash = getHashCount(str);
-		String actualEndPoint = "";
-
-		if (countOfHash == 2) {
-
-			String[] arrOfStr = str.split("#", 0);
-
-			String EndpointPartOne = arrOfStr[1];
-			String[] EndpointPartTwo = arrOfStr[2].split("}", 2);
-
-			System.out.println(EndpointPartOne);
-			System.out.println(EndpointPartTwo[0]);
-
-			actualEndPoint = EndpointPartOne + EndpointPartTwo[0];
-
-		} else if (countOfHash == 4) {
-			String[] arrOfStr = str.split("#", 0);
-
-			String[] EndpointPartOne = arrOfStr[2].split("\\$", 2);
-			String[] EndpointPartTwo = arrOfStr[4].split("}", 2);
-
-			System.out.println(EndpointPartOne[0]);
-			System.out.println(EndpointPartTwo[0]);
-
-			actualEndPoint = EndpointPartOne[0] + EndpointPartTwo[0];
+		int timeout = 1000;
+		if (InetAddress.getByName("http://192.168.182.237").isReachable(timeout)) {
+			System.out.println("is reachable");
 		}
-	}
 
-	private static int getHashCount(String str) {
-		char someChar = '#';
-		int count = 0;
-
-		for (int i = 0; i < str.length(); i++) {
-			if (str.charAt(i) == someChar) {
-				count++;
-			}
-		}
-		return count;
 	}
 }
