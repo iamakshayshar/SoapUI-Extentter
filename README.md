@@ -96,6 +96,7 @@ As an addOn to this utility, I have also added code for data driven testing supp
 
 # Support:
 * This utlity is tested with SOAPUI version 5.3.0, 5.4.0, 5.5.0 & 5.6.0.
+* With version 4.0, this utility is supported and tested with ReadyAPI version 3.9.0, 3.9.1 & 3.9.2
 * This utlity is testing on JAVA version "1.8.0_221".
 * This utlity is build on top of ExtentReport 5.0.8
 * This utility supports Klov Docker release 1.0.1
