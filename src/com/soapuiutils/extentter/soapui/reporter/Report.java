@@ -2,10 +2,6 @@ package com.soapuiutils.extentter.soapui.reporter;
 
 import java.io.File;
 import java.net.URI;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -13,7 +9,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.io.FileUtils;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.markuputils.Markup;
@@ -225,9 +220,7 @@ public class Report {
 					}
 
 					if (endPoint.contains("#")) {
-
 						actualEndPoint = getEndpoint(endPoint);
-
 						if (actualEndPoint.contains("-")) {
 							String[] Endpoints = actualEndPoint.split("-", 2);
 							String partOne = Endpoints[0].trim();
@@ -332,9 +325,7 @@ public class Report {
 					}
 
 					if (endPoint.contains("#")) {
-
 						actualEndPoint = getEndpoint(endPoint);
-
 						if (actualEndPoint.contains("-")) {
 							String[] Endpoints = actualEndPoint.split("-", 2);
 							String partOne = Endpoints[0].trim();
