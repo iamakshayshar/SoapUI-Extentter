@@ -1,3 +1,5 @@
+[![release-badge][]][release]
+
 ## :pushpin: SOAPUI-Extentter
 This is an easy utility create to generate extent report based on SOAPUI project execution. This utility supports SOAPUI PROJECT execution report, SOAPUI TESTSUITE execution report and you can also generate SOAPUI Individual TestCase execution report.
 
