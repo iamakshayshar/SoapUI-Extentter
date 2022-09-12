@@ -1,4 +1,5 @@
 [release]: https://github.com/iamakshayshar/SoapUI-Extentter/releases/latest "Latest release"
+[release-badge]: https://img.shields.io/github/release/allure-framework/allure2.svg?style=flat
 
 [![release-badge][]][release]
 
