@@ -1,8 +1,3 @@
-[release]: https://github.com/iamakshayshar/SoapUI-Extentter/releases/latest "Latest release"
-[release-badge]: https://img.shields.io/github/release/allure-framework/allure2.svg?style=flat
-
-[![release-badge][]][release]
-
 ## :pushpin: SOAPUI-Extentter
 This is an easy utility create to generate extent report based on SOAPUI project execution. This utility supports SOAPUI PROJECT execution report, SOAPUI TESTSUITE execution report and you can also generate SOAPUI Individual TestCase execution report.
 
