@@ -1,3 +1,5 @@
+[release]: https://github.com/iamakshayshar/SoapUI-Extentter/releases/latest "Latest release"
+
 [![release-badge][]][release]
 
 ## :pushpin: SOAPUI-Extentter
