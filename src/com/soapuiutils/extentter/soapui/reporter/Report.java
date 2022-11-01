@@ -188,6 +188,7 @@ public class Report {
 		String actualData;
 		String actualEndPoint = "Unable to fetch the endpoint information";
 		String endPoint = "Unable to fetch the endpoint information";
+		String endPointLocation = null;
 		String actualRespAsXml = null;
 
 		try {
@@ -227,6 +228,7 @@ public class Report {
 					if (endPoint.contains("#")) {
 
 						actualEndPoint = getEndpoint(endPoint);
+						endPointLocation = getEndpointRef(endPoint);
 
 						if (actualEndPoint.contains("-")) {
 							String[] Endpoints = actualEndPoint.split("-", 2);
@@ -236,8 +238,16 @@ public class Report {
 							actualEndPoint = partOne + env;
 						}
 
-						actualEndPoint = testStepContext.getTestStep().getTestCase().getTestSuite().getProject()
-								.getProperty(actualEndPoint).getValue();
+						if (endPointLocation.equalsIgnoreCase("Project")) {
+							actualEndPoint = testStepContext.getTestStep().getTestCase().getTestSuite().getProject()
+									.getProperty(actualEndPoint).getValue();
+						} else if (endPointLocation.equalsIgnoreCase("TestSuite")) {
+							actualEndPoint = testStepContext.getTestStep().getTestCase().getTestSuite()
+									.getProperty(actualEndPoint).getValue();
+						} else if (endPointLocation.equalsIgnoreCase("TestCase")) {
+							actualEndPoint = testStepContext.getTestStep().getTestCase().getProperty(actualEndPoint)
+									.getValue();
+						}
 
 						actualData = "<br><b>\n\n ENDPOINT DETAILS : </b>" + actualEndPoint;
 
@@ -283,6 +293,7 @@ public class Report {
 		String actualData;
 		String actualEndPoint = "Unable to fetch the endpoint information";
 		String endPoint = "Unable to fetch the endpoint information";
+		String endPointLocation = null;
 		ArrayList<String> failedMessages = new ArrayList<String>();
 
 		try {
@@ -334,6 +345,7 @@ public class Report {
 					if (endPoint.contains("#")) {
 
 						actualEndPoint = getEndpoint(endPoint);
+						endPointLocation = getEndpointRef(endPoint);
 
 						if (actualEndPoint.contains("-")) {
 							String[] Endpoints = actualEndPoint.split("-", 2);
@@ -343,8 +355,16 @@ public class Report {
 							actualEndPoint = partOne + env;
 						}
 
-						actualEndPoint = testStepContext.getTestStep().getTestCase().getTestSuite().getProject()
-								.getProperty(actualEndPoint).getValue();
+						if (endPointLocation.equalsIgnoreCase("Project")) {
+							actualEndPoint = testStepContext.getTestStep().getTestCase().getTestSuite().getProject()
+									.getProperty(actualEndPoint).getValue();
+						} else if (endPointLocation.equalsIgnoreCase("TestSuite")) {
+							actualEndPoint = testStepContext.getTestStep().getTestCase().getTestSuite()
+									.getProperty(actualEndPoint).getValue();
+						} else if (endPointLocation.equalsIgnoreCase("TestCase")) {
+							actualEndPoint = testStepContext.getTestStep().getTestCase().getProperty(actualEndPoint)
+									.getValue();
+						}
 
 						actualData = "<br><b>\n\n ENDPOINT DETAILS : </b>" + actualEndPoint;
 
@@ -491,5 +511,21 @@ public class Report {
 			}
 		}
 		return count;
+	}
+
+	private String getEndpointRef(String endPoint) {
+		int countOfHash = getHashCount(endPoint);
+		String actualEndRef = "";
+		if (countOfHash == 2) {
+			String[] arrOfStr = endPoint.split("#", 0);
+			String[] EndpointPartOne = arrOfStr[1].split("}", 2);
+			actualEndRef = EndpointPartOne[0];
+		} else if (countOfHash == 4) {
+			String[] arrOfStr = endPoint.split("#", 0);
+			String[] EndpointPartOne = arrOfStr[2].split("\\$", 2);
+			String[] EndpointPartTwo = arrOfStr[4].split("}", 2);
+			actualEndRef = EndpointPartOne[0].trim() + " - " + EndpointPartTwo[0].trim();
+		}
+		return actualEndRef;
 	}
 }
