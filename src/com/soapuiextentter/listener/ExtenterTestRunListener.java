@@ -1,4 +1,4 @@
-package com.soapuiutils.extentter.soapui.listener;
+package com.soapuiextentter.listener;
 
 import java.io.File;
 import java.util.HashMap;
@@ -9,8 +9,8 @@ import com.eviware.soapui.model.testsuite.TestCaseRunner;
 import com.eviware.soapui.model.testsuite.TestRunListener;
 import com.eviware.soapui.model.testsuite.TestStep;
 import com.eviware.soapui.model.testsuite.TestStepResult;
-import com.soapuiutils.extentter.soapui.service.SoapUIService;
-import com.soapuiutils.extentter.soapui.service.SoapUIServiceImpl;
+import com.soapuiextentter.service.SoapUIService;
+import com.soapuiextentter.service.SoapUIServiceImpl;
 
 /*
  * Author : Akshay Sharma
@@ -31,7 +31,7 @@ public class ExtenterTestRunListener implements TestRunListener {
 				TCservice = new SoapUIServiceImpl();
 
 				String projectXmlPath = context.getTestCase().getTestSuite().getProject().getPath();
-				int index = projectXmlPath.lastIndexOf("\\");
+				int index = projectXmlPath.lastIndexOf(File.separator);
 				reportPath = projectXmlPath.substring(0, index);
 				reportPath = reportPath + File.separator + "Reports";
 

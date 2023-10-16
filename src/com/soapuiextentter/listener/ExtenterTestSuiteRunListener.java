@@ -1,4 +1,4 @@
-package com.soapuiutils.extentter.soapui.listener;
+package com.soapuiextentter.listener;
 
 import java.io.File;
 import java.util.HashMap;
@@ -9,8 +9,8 @@ import com.eviware.soapui.model.testsuite.TestCaseRunner;
 import com.eviware.soapui.model.testsuite.TestSuiteRunContext;
 import com.eviware.soapui.model.testsuite.TestSuiteRunListener;
 import com.eviware.soapui.model.testsuite.TestSuiteRunner;
-import com.soapuiutils.extentter.soapui.service.SoapUIService;
-import com.soapuiutils.extentter.soapui.service.SoapUIServiceImpl;
+import com.soapuiextentter.service.SoapUIService;
+import com.soapuiextentter.service.SoapUIServiceImpl;
 
 /*
  * Author : Akshay Sharma
@@ -32,7 +32,7 @@ public class ExtenterTestSuiteRunListener implements TestSuiteRunListener {
 				SoapUI.log("Reports are published at " + reportPath);
 			}
 		} catch (Throwable t) {
-			SoapUI.log("TSYS Extentter Error in  beforeTestCase of TestSuiteRunListener " + t.getMessage());
+			SoapUI.log("SOAPUI Extentter Error in  beforeTestCase of TestSuiteRunListener " + t.getMessage());
 		}
 	}
 
@@ -43,7 +43,7 @@ public class ExtenterTestSuiteRunListener implements TestSuiteRunListener {
 				TSservice = new SoapUIServiceImpl();
 
 				String projectXmlPath = context.getTestSuite().getProject().getPath();
-				int index = projectXmlPath.lastIndexOf("\\");
+				int index = projectXmlPath.lastIndexOf(File.separator);
 				reportPath = projectXmlPath.substring(0, index);
 				reportPath = reportPath + File.separator + "Reports";
 
@@ -60,7 +60,7 @@ public class ExtenterTestSuiteRunListener implements TestSuiteRunListener {
 				TSservice.startTestSuiteLogging(testSuiteName, testSuiteDesc, testSuiteId);
 			}
 		} catch (Exception t) {
-			SoapUI.log("TSYS Extentter plugin cannot be initialized. " + t.getMessage());
+			SoapUI.log("SOAPUI Extentter plugin cannot be initialized. " + t.getMessage());
 		}
 	}
 
@@ -80,7 +80,7 @@ public class ExtenterTestSuiteRunListener implements TestSuiteRunListener {
 				TSservice.startTestCaseLogging(testCaseName, testSuiteId, testCaseId);
 			}
 		} catch (Throwable t) {
-			SoapUI.log("TSYS Extentter Error in  beforeTestCase of TestSuiteRunListener " + t.getMessage());
+			SoapUI.log("SOAPUI Extentter Error in  beforeTestCase of TestSuiteRunListener " + t.getMessage());
 		}
 	}
 

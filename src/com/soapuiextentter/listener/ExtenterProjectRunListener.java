@@ -1,4 +1,4 @@
-package com.soapuiutils.extentter.soapui.listener;
+package com.soapuiextentter.listener;
 
 import java.io.File;
 import java.net.InetAddress;
@@ -12,8 +12,8 @@ import com.eviware.soapui.model.testsuite.ProjectRunner;
 import com.eviware.soapui.model.testsuite.TestProperty;
 import com.eviware.soapui.model.testsuite.TestSuite;
 import com.eviware.soapui.model.testsuite.TestSuiteRunner;
-import com.soapuiutils.extentter.soapui.service.SoapUIService;
-import com.soapuiutils.extentter.soapui.service.SoapUIServiceImpl;
+import com.soapuiextentter.service.SoapUIService;
+import com.soapuiextentter.service.SoapUIServiceImpl;
 
 /*
  * Author : Akshay Sharma
@@ -34,7 +34,7 @@ public class ExtenterProjectRunListener implements ProjectRunListener {
 			HashMap<String, String> klovConfig = getKlovConfiguration(properties);
 			Projservice = new SoapUIServiceImpl();
 			String projectXmlPath = context.getProject().getPath();
-			int index = projectXmlPath.lastIndexOf("\\");
+			int index = projectXmlPath.lastIndexOf(File.separator);
 			reportPath = projectXmlPath.substring(0, index);
 			reportPath = reportPath + File.separator + "Reports";
 
