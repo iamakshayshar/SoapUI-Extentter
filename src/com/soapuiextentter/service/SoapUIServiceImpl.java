@@ -1,4 +1,4 @@
-package com.soapuiutils.extentter.soapui.service;
+package com.soapuiextentter.service;
 
 import java.util.HashMap;
 import java.util.List;
@@ -10,8 +10,8 @@ import com.eviware.soapui.model.testsuite.TestProperty;
 import com.eviware.soapui.model.testsuite.TestStep;
 import com.eviware.soapui.model.testsuite.TestStepResult;
 import com.eviware.soapui.model.testsuite.TestStepResult.TestStepStatus;
+import com.soapuiextentter.reporter.Report;
 import com.eviware.soapui.model.testsuite.TestSuiteRunner;
-import com.soapuiutils.extentter.soapui.reporter.Report;
 
 /*
  * Author : Akshay Sharma

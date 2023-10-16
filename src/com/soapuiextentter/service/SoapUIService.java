@@ -1,4 +1,4 @@
-package com.soapuiutils.extentter.soapui.service;
+package com.soapuiextentter.service;
 
 import java.util.HashMap;
 import java.util.List;

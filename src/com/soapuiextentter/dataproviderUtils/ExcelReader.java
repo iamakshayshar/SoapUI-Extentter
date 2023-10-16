@@ -1,4 +1,4 @@
-package com.soapuiutils.dataprovider.soapui.utils;
+package com.soapuiextentter.dataproviderUtils;
 
 import java.io.File;
 import java.io.FileInputStream;

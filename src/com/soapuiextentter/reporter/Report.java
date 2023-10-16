@@ -1,11 +1,7 @@
-package com.soapuiutils.extentter.soapui.reporter;
+package com.soapuiextentter.reporter;
 
 import java.io.File;
 import java.net.URI;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -13,7 +9,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.io.FileUtils;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.markuputils.Markup;
@@ -212,13 +207,11 @@ public class Report {
 				AuthType = testStepContext.getTestStep().getProperty("AuthType");
 
 				if (GroovyScript == null) {
-
 					actualReq = Request.getValue();
 					actualRes = Response.getValue();
 					Markup mReqRes = MarkupHelper.createCodeBlock(actualReq, actualRes);
-
 					endPoint = testStepContext.getTestStep().getProperty("Endpoint").getValue();
-
+					
 					if (AuthType == null) {
 						assignCategory(testSuiteId, "REST");
 					} else {
@@ -226,10 +219,8 @@ public class Report {
 					}
 
 					if (endPoint.contains("#")) {
-
 						actualEndPoint = getEndpoint(endPoint);
 						endPointLocation = getEndpointRef(endPoint);
-
 						if (actualEndPoint.contains("-")) {
 							String[] Endpoints = actualEndPoint.split("-", 2);
 							String partOne = Endpoints[0].trim();
@@ -250,17 +241,13 @@ public class Report {
 						}
 
 						actualData = "<br><b>\n\n ENDPOINT DETAILS : </b>" + actualEndPoint;
-
 						getTestNode(testSuiteId, testCaseId).pass(logText + " <b>Check Details </b> " + actualData
 								+ "<br><b>Below are the Actual Request and Response Data.</b>");
-
 						getTestNode(testSuiteId, testCaseId).info(mReqRes);
 					} else {
 						actualData = "<br><b>\n\n ENDPOINT DETAILS : </b>" + endPoint;
-
 						getTestNode(testSuiteId, testCaseId).pass(logText + " <b>Check Details </b> " + actualData
 								+ "<br><b>Below are the Actual Request and Response Data.</b>");
-
 						getTestNode(testSuiteId, testCaseId).info(mReqRes);
 					}
 				} else {
@@ -329,11 +316,9 @@ public class Report {
 				AuthType = testStepContext.getTestStep().getProperty("AuthType");
 
 				if (GroovyScript == null) {
-
 					actualReq = Request.getValue();
 					actualRes = Response.getValue();
 					Markup mReqRes = MarkupHelper.createCodeBlock(actualReq, actualRes);
-
 					endPoint = testStepContext.getTestStep().getProperty("Endpoint").getValue();
 
 					if (AuthType == null) {
@@ -343,10 +328,8 @@ public class Report {
 					}
 
 					if (endPoint.contains("#")) {
-
 						actualEndPoint = getEndpoint(endPoint);
 						endPointLocation = getEndpointRef(endPoint);
-
 						if (actualEndPoint.contains("-")) {
 							String[] Endpoints = actualEndPoint.split("-", 2);
 							String partOne = Endpoints[0].trim();
@@ -367,35 +350,24 @@ public class Report {
 						}
 
 						actualData = "<br><b>\n\n ENDPOINT DETAILS : </b>" + actualEndPoint;
-
 						getTestNode(testSuiteId, testCaseId).fail(logText + " <b>Failed. Check Details </b> "
 								+ actualData + "<br><b>Below are the Actual Request and Response Data.</b>");
-
 						getTestNode(testSuiteId, testCaseId).info(mReqRes);
-
 						getTestNode(testSuiteId, testCaseId).info(new RuntimeException(failedMessages.toString()));
-
 						failedMessages.clear();
 					} else {
 						actualData = "<br><b>\n\n ENDPOINT DETAILS : </b>" + endPoint;
-
 						getTestNode(testSuiteId, testCaseId).fail(logText + " <b>Failed. Check Details </b> "
 								+ actualData + "<br><b>Below are the Actual Request and Response Data.</b>");
-
 						getTestNode(testSuiteId, testCaseId).info(mReqRes);
-
 						getTestNode(testSuiteId, testCaseId).info(new RuntimeException(failedMessages.toString()));
-
 						failedMessages.clear();
 					}
 				} else if (Request == null) {
 					SoapUI.log("Test Log Started for TestStep " + logText + " of TestCase " + testCaseId
 							+ " of TestSuite " + testSuiteId);
-
 					getTestNode(testSuiteId, testCaseId).fail(logText + " <b>Failed. Check Details </b> ");
-
 					getTestNode(testSuiteId, testCaseId).info(new RuntimeException(failedMessages.toString()));
-
 					failedMessages.clear();
 				} else {
 					getTestNode(testSuiteId, testCaseId).fail(logText + " <b>Failed.<b>");
@@ -403,11 +375,8 @@ public class Report {
 			} else {
 				SoapUI.log("Test Log Started for TestStep " + logText + " of TestCase " + testCaseId + " of TestSuite "
 						+ testSuiteId);
-
 				getTestNode(testSuiteId, testCaseId).fail(logText + " <b>Failed. Check Details </b> ");
-
 				getTestNode(testSuiteId, testCaseId).info(new RuntimeException(failedMessages.toString()));
-
 				failedMessages.clear();
 			}
 		} catch (Exception e) {
