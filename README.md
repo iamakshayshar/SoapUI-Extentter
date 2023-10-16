@@ -2,7 +2,7 @@
 The pro version for this utility have some more features like Automatic Email Reporting. please email for further details. [Akshay Sharma](mailto:akshay.sharma979@gmail.com)
 
 ## :pushpin: Not Interested in Reading ? Watch video and setup
-[<img src="https://img.youtube.com/vi/IAefMoBb0nI/0.jpg" width="50%">](https://www.youtube.com/watch?v=IAefMoBb0nI "Integrate Extent Report with SOAPUI")
+[<img src="https://img.youtube.com/vi/IAefMoBb0nI/0.jpg" width="100%">](https://www.youtube.com/watch?v=IAefMoBb0nI "Integrate Extent Report with SOAPUI")
 
 
 ## :pushpin: SOAPUI-Extentter
