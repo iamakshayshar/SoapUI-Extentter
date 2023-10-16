@@ -109,4 +109,4 @@ As an addOn to this utility, I have also added code for data driven testing supp
 * This utility supports Klov Docker release 1.0.1
 
 ## :pushpin: License
-SoapUI-Extentter is an Open Source Plugin and 4.0 will be released under Apache-2.0
+SoapUI-Extentter is an Open Source Plugin and 4.0 and later will be released under Apache-2.0
