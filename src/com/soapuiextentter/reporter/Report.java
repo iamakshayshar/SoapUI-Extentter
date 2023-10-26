@@ -30,7 +30,6 @@ import com.soapuiextentter.utilities.StringUtils;
 public class Report {
 
 	private ExtentReports reports;
-	private Object object;
 	private static Map extentNodeMap;
 	private static Map extentTestMap;
 	private String finalReportPath;
@@ -448,6 +447,8 @@ public class Report {
 									"Invalid value specified for 'AddDataToReport' in project properties. Please check and correct.");
 							return propValue;
 						}
+					} else {
+						propValue = true;
 					}
 				}
 			}
