@@ -19,6 +19,7 @@ import com.aventstack.extentreports.reporter.configuration.Theme;
 import com.eviware.soapui.SoapUI;
 import com.eviware.soapui.model.testsuite.TestProperty;
 import com.eviware.soapui.model.testsuite.TestStepResult;
+import com.soapuiextentter.utilities.StringUtils;
 
 /*
  * Author : Akshay Sharma
@@ -29,7 +30,6 @@ import com.eviware.soapui.model.testsuite.TestStepResult;
 public class Report {
 
 	private ExtentReports reports;
-	private Object object;
 	private static Map extentNodeMap;
 	private static Map extentTestMap;
 	private String finalReportPath;
@@ -79,12 +79,12 @@ public class Report {
 		}
 	}
 
-	public static String getReportName(String reportName) {
+	private static String getReportName(String reportName) {
 		String fileName = "AutomationReport_" + reportName + "_" + java.time.LocalDate.now() + ".html";
 		return fileName;
 	}
 
-	public void assignCategory(String testSuiteId, String categoryName) {
+	private void assignCategory(String testSuiteId, String categoryName) {
 		try {
 			getTest(testSuiteId).assignCategory(categoryName);
 		} catch (Exception e) {
@@ -93,7 +93,7 @@ public class Report {
 		}
 	}
 
-	public void assignAuthor(String testSuiteId, String authorName) {
+	private void assignAuthor(String testSuiteId, String authorName) {
 		try {
 			getTest(testSuiteId).assignAuthor(authorName);
 		} catch (Exception e) {
@@ -209,9 +209,10 @@ public class Report {
 				if (GroovyScript == null) {
 					actualReq = Request.getValue();
 					actualRes = Response.getValue();
-					Markup mReqRes = MarkupHelper.createCodeBlock(actualReq, actualRes);
+					Markup mReqRes = MarkupHelper.createCodeBlock(formatXmlOrJson(actualReq),
+							formatXmlOrJson(actualRes));
 					endPoint = testStepContext.getTestStep().getProperty("Endpoint").getValue();
-					
+
 					if (AuthType == null) {
 						assignCategory(testSuiteId, "REST");
 					} else {
@@ -257,7 +258,7 @@ public class Report {
 				ResponseAsXML = testStepContext.getTestStep().getProperty("ResponseAsXml");
 				getTestNode(testSuiteId, testCaseId).pass(logText + " <b>-  JDBC Response as below</b>");
 				actualRespAsXml = ResponseAsXML.getValue();
-				Markup mSqlResponse = MarkupHelper.createCodeBlock(actualRespAsXml);
+				Markup mSqlResponse = MarkupHelper.createCodeBlock(formatXmlOrJson(actualRespAsXml));
 				getTestNode(testSuiteId, testCaseId).info(mSqlResponse);
 				assignCategory(testSuiteId, "JDBC");
 			} else {
@@ -318,7 +319,8 @@ public class Report {
 				if (GroovyScript == null) {
 					actualReq = Request.getValue();
 					actualRes = Response.getValue();
-					Markup mReqRes = MarkupHelper.createCodeBlock(actualReq, actualRes);
+					Markup mReqRes = MarkupHelper.createCodeBlock(formatXmlOrJson(actualReq),
+							formatXmlOrJson(actualRes));
 					endPoint = testStepContext.getTestStep().getProperty("Endpoint").getValue();
 
 					if (AuthType == null) {
@@ -445,6 +447,8 @@ public class Report {
 									"Invalid value specified for 'AddDataToReport' in project properties. Please check and correct.");
 							return propValue;
 						}
+					} else {
+						propValue = true;
 					}
 				}
 			}
@@ -496,5 +500,15 @@ public class Report {
 			actualEndRef = EndpointPartOne[0].trim() + " - " + EndpointPartTwo[0].trim();
 		}
 		return actualEndRef;
+	}
+
+	private String formatXmlOrJson(String unformattedStr) {
+		String formattedXMl = unformattedStr;
+		if (unformattedStr.startsWith("[") || unformattedStr.startsWith("{")) {
+			formattedXMl = StringUtils.prettyPrintJson(unformattedStr);
+		} else if (unformattedStr.startsWith("<")) {
+			formattedXMl = StringUtils.prettyPrintXML(unformattedStr);
+		}
+		return formattedXMl;
 	}
 }
