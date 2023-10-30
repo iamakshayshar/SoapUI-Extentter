@@ -102,10 +102,10 @@ If the value if FALSE, then the project properties are NOT added to Extent Repor
 As an addOn to this utility, I have also added code for data driven testing support inside SOAPUI. This git repo also have one sample project (calculator-soapui-project_Updated.xml) which have all the groovy code for data driven testing.
 
 ## :pushpin: Support:
-* This utlity is tested with SOAPUI version 5.3.0, 5.4.0, 5.5.0, 5.6.0, 5.7.0 & 5.7.1
+* This utlity is tested with SOAPUI version 5.6.0, 5.7.0 & 5.7.1
 * With version 4.0, this utility is supported and tested with ReadyAPI version 3.9.0, 3.9.1 & 3.9.2
-* This utlity is testing on JAVA version "1.8.0_221".
-* This utlity is build on top of ExtentReport v5.0.9
+* This utlity is testing on JAVA version-11.
+* This utlity is build on top of ExtentReport v5.1.1
 * This utility supports Klov Docker release 1.0.1
 
 ## :pushpin: License
