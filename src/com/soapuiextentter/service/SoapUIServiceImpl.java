@@ -10,8 +10,8 @@ import com.eviware.soapui.model.testsuite.TestProperty;
 import com.eviware.soapui.model.testsuite.TestStep;
 import com.eviware.soapui.model.testsuite.TestStepResult;
 import com.eviware.soapui.model.testsuite.TestStepResult.TestStepStatus;
-import com.soapuiextentter.reporter.Report;
 import com.eviware.soapui.model.testsuite.TestSuiteRunner;
+import com.soapuiextentter.reporter.Report;
 
 /*
  * Author : Akshay Sharma

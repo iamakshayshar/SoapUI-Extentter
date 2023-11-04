@@ -29,9 +29,10 @@ public class ExtenterProjectRunListener implements ProjectRunListener {
 
 	public void beforeRun(ProjectRunner runner, ProjectRunContext context) {
 		// SoapUI.log("Inside BeforeRun in ProjectRunListener - 1");
+		HashMap<String, String> klovConfig = new HashMap<String, String>();
 		try {
 			List<TestProperty> properties = context.getProject().getPropertyList();
-			HashMap<String, String> klovConfig = getKlovConfiguration(properties);
+			klovConfig = getKlovConfiguration(properties);
 			Projservice = new SoapUIServiceImpl();
 			String projectXmlPath = context.getProject().getPath();
 			int index = projectXmlPath.lastIndexOf(File.separator);
@@ -40,7 +41,11 @@ public class ExtenterProjectRunListener implements ProjectRunListener {
 
 			String reportName = context.getProject().getName();
 			Projservice.startReporting(reportPath, reportName, klovConfig);
-			Projservice.addEnvDetails(properties);
+
+			if (!properties.isEmpty() || properties.size() != 0) {
+				Projservice.addEnvDetails(properties);
+			}
+
 		} catch (Exception t) {
 			SoapUI.log("SOAPUI Extentter plugin cannot be initialized. " + t.getMessage());
 		}
@@ -49,9 +54,8 @@ public class ExtenterProjectRunListener implements ProjectRunListener {
 	private HashMap<String, String> getKlovConfiguration(List<TestProperty> properties) {
 		HashMap<String, String> klovMap = new HashMap<String, String>();
 		try {
-			int propSize = properties.size();
-			if (propSize != 0) {
-				for (int propInterator = 0; propInterator < propSize; propInterator++) {
+			if (!properties.isEmpty() || properties.size() != 0) {
+				for (int propInterator = 0; propInterator < properties.size(); propInterator++) {
 					if (properties.get(propInterator).getName().equalsIgnoreCase("MongoDBIP")) {
 						if (properties.get(propInterator).getValue() != null && InetAddress
 								.getByName(properties.get(propInterator).getValue()).isReachable(timeout)) {
