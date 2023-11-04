@@ -57,15 +57,20 @@ public class Report {
 			reports.setSystemInfo("Executor", System.getProperty("user.name"));
 			reports.setSystemInfo("SoapUI Version", SoapUI.SOAPUI_VERSION);
 
-			if (!klovConfig.get("MongoDBIP").isEmpty() && !klovConfig.get("MongoDBPort").isEmpty()
-					&& !klovConfig.get("KlovServerUrl").isEmpty()) {
-				ExtentKlovReporter klov = new ExtentKlovReporter(reportName);
-				klov.initMongoDbConnection(klovConfig.get("MongoDBIP"),
-						Integer.parseInt(klovConfig.get("MongoDBPort")));
-				klov.setProjectName(reportName);
-				klov.setReportName("2.0");
-				klov.initKlovServerConnection(klovConfig.get("KlovServerUrl"));
-				reports.attachReporter(spark, klov);
+			if (klovConfig.size() != 0) {
+				if (!klovConfig.get("MongoDBIP").isEmpty() && !klovConfig.get("MongoDBPort").isEmpty()
+						&& !klovConfig.get("KlovServerUrl").isEmpty()) {
+					ExtentKlovReporter klov = new ExtentKlovReporter(reportName);
+					klov.initMongoDbConnection(klovConfig.get("MongoDBIP"),
+							Integer.parseInt(klovConfig.get("MongoDBPort")));
+					klov.setProjectName(reportName);
+					klov.setReportName("2.0");
+					klov.initKlovServerConnection(klovConfig.get("KlovServerUrl"));
+					reports.attachReporter(spark, klov);
+				} else {
+					SoapUI.log("Klov Configuration missing or Wrong");
+					reports.attachReporter(spark);
+				}
 			} else {
 				reports.attachReporter(spark);
 			}
@@ -411,19 +416,15 @@ public class Report {
 			flag = envLogCheck(properties);
 			if (flag) {
 				int propSize = properties.size();
-				if (propSize != 0) {
-					for (int propInterator = 0; propInterator < propSize; propInterator++) {
-						if (properties.get(propInterator).getName().contains("Password")
-								|| properties.get(propInterator).getName().contains("Pass")) {
-							reports.setSystemInfo(properties.get(propInterator).getName(), "*******");
-						} else {
-							reports.setSystemInfo(properties.get(propInterator).getName(),
-									properties.get(propInterator).getValue());
-						}
+				for (int propInterator = 0; propInterator < propSize; propInterator++) {
+					if (properties.get(propInterator).getName().contains("Password")
+							|| properties.get(propInterator).getName().contains("Pass")) {
+						reports.setSystemInfo(properties.get(propInterator).getName(), "*******");
+					} else {
+						reports.setSystemInfo(properties.get(propInterator).getName(),
+								properties.get(propInterator).getValue());
 					}
 				}
-			} else {
-				reports.setSystemInfo("AddDataToReport", "False");
 			}
 		} catch (Exception e) {
 			String exceptionMessage = " Exception occurred for Report method - addEnvironmentDetails as ";
@@ -432,31 +433,29 @@ public class Report {
 	}
 
 	private boolean envLogCheck(List<TestProperty> properties) {
-		boolean propValue = true;
+		boolean logValues = true;
 		try {
 			int propSize = properties.size();
-			if (propSize != 0) {
-				for (int propInterator = 0; propInterator < propSize; propInterator++) {
-					if (properties.get(propInterator).getName().equalsIgnoreCase("AddDataToReport")) {
-						if (properties.get(propInterator).getValue().equalsIgnoreCase("True")) {
-							return propValue;
-						} else if (properties.get(propInterator).getValue().equalsIgnoreCase("False")) {
-							return false;
-						} else {
-							SoapUI.log(
-									"Invalid value specified for 'AddDataToReport' in project properties. Please check and correct.");
-							return propValue;
-						}
+			for (int propInterator = 0; propInterator < propSize; propInterator++) {
+				if (properties.get(propInterator).getName().equalsIgnoreCase("AddDataToReport")) {
+					if (properties.get(propInterator).getValue().equalsIgnoreCase("True")) {
+						return logValues;
+					} else if (properties.get(propInterator).getValue().equalsIgnoreCase("False")) {
+						return false;
 					} else {
-						propValue = true;
+						SoapUI.log(
+								"Invalid value specified for 'AddDataToReport' in project properties. Please check and correct.");
+						return logValues;
 					}
+				} else {
+					logValues = true;
 				}
 			}
 		} catch (Exception e) {
 			String exceptionMessage = " Exception occurred for Report method - addEnvironmentDetails as ";
 			SoapUI.log(exceptionMessage + e.toString());
 		}
-		return propValue;
+		return logValues;
 	}
 
 	private String getEndpoint(String endPoint) {
